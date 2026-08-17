@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .remember-forgot a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .remember-forgot a:hover {
+            color: #764ba2;
+        }
+
+        .checkbox {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .sign-in-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .sign-in-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .sign-in-btn:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            color: #ccc;
+            font-size: 13px;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+        }
+
+        .social-btn:hover {
+            background: #f5f5f5;
+            border-color: #667eea;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .signup-link a:hover {
+            color: #764ba2;
+        }
+
+        .success-message {
+            color: #27ae60;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign In</h1>
+
+        <div class="success-message" id="successMessage">Sign in successful! Welcome back.</div>
+
+        <form id="signInForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                <div class="error-message" id="emailError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+
+            <div class="remember-forgot">
+                <label style="display: flex; align-items: center;">
+                    <input type="checkbox" name="remember" class="checkbox">
+                    <span>Remember me</span>
+                </label>
+                <a href="#forgot">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="sign-in-btn">Sign In</button>
+        </form>
+
+        <div class="divider">OR</div>
+
+        <div class="social-login">
+            <button type="button" class="social-btn" onclick="alert('Google sign-in')">Google</button>
+            <button type="button" class="social-btn" onclick="alert('Microsoft sign-in')">Microsoft</button>
+            <button type="button" class="social-btn" onclick="alert('GitHub sign-in')">GitHub</button>
+        </div>
+
+        <div class="signup-link">
+            Don't have an account? <a href="#signup">Sign up</a>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('signInForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const successMessage = document.getElementById('successMessage');
+
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function clearErrors() {
+            emailError.style.display = 'none';
+            passwordError.style.display = 'none';
+            successMessage.style.display = 'none';
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            clearErrors();
+
+            let isValid = true;
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            // Validate email
+            if (!email) {
+                emailError.textContent = 'Email is required';
+                emailError.style.display = 'block';
+                isValid = false;
+            } else if (!validateEmail(email)) {
+                emailError.textContent = 'Please enter a valid email address';
+                emailError.style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate password
+            if (!password) {
+                passwordError.textContent = 'Password is required';
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else if (password.length < 6) {
+                passwordError.textContent = 'Password must be at least 6 characters';
+                passwordError.style.display = 'block';
+                isValid = false;
+            }
+
+            // If valid, show success message
+            if (isValid) {
+                successMessage.style.display = 'block';
+                form.reset();
+                console.log('Sign in successful:', { email });
+                // Here you would typically send data to a server
+            }
+        });
+
+        // Clear error messages on input
+        emailInput.addEventListener('input', () => {
+            if (emailInput.value) {
+                emailError.style.display = 'none';
+            }
+        });
+
+        passwordInput.addEventListener('input', () => {
+            if (passwordInput.value) {
+                passwordError.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
